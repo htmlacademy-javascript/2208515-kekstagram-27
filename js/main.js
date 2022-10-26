@@ -78,8 +78,15 @@ const createPhoto = () => ({
   comments: createComment()
 });
 
-const simularPhotos = Array.from({length: 25}, createPhoto);
-simularPhotos([]);
+const createPhotos = function () {
+  const photos = [];
+  for (let i = 1; i <= 25; i++) {
+    photos.push(createPhoto());
+  }
+  return photos;
+};
+
+createPhotos();
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 checkStringLength ('1sdfs', 1);

@@ -38,13 +38,14 @@ const createComment = () => ({
 });
 
 const PHOTO_COUNT = 25;
+const COMMENT_COUNT = 5;
 
 const createPhoto = () => ({
   id: generatePhotoId(),
   url: `photos/${generatePhotoIdUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomPositiveInteger(15, 200),
-  comments: createComment()
+  comments: Array.from({length: getRandomPositiveInteger(1, COMMENT_COUNT)}, (_, id) => createComment(id + 1))
 });
 
 const createPhotos = () => Array.from({length: PHOTO_COUNT}, createPhoto);

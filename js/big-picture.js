@@ -7,31 +7,29 @@ const commentsList = bigPicture.querySelector('.social__comments');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-const setEscKeydownHandler = (evt) => {
+const EscKeydownHandler = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    setBigPictureCloseHandlers();
+    BigPictureCloseHandlers();
   }
 };
 
-const setCloseButtonClickHandler = () => setBigPictureCloseHandlers();
-
-function setBigPictureCloseHandlers () {
+function BigPictureCloseHandlers () {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   commentsCount.classList.remove('hidden');
   commentsLoader.classList.remove('hidden');
-  bigPictureCancel.removeEventListener('click', setCloseButtonClickHandler);
-  document.removeEventListener('keydown', setEscKeydownHandler);
+  bigPictureCancel.removeEventListener('click', BigPictureCloseHandlers);
+  document.removeEventListener('keydown', EscKeydownHandler);
 }
 
-function setBigPictureOpenHandlers () {
+function openBigPicture () {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  bigPictureCancel.addEventListener('click', setCloseButtonClickHandler);
-  document.addEventListener('keydown', setEscKeydownHandler);
+  bigPictureCancel.addEventListener('click', BigPictureCloseHandlers);
+  document.addEventListener('keydown', EscKeydownHandler);
 }
 
 //Показывает информацию о комментаторе
@@ -64,7 +62,7 @@ const showBigPicture = (picture) => {
   bigPicture.querySelector('.social__caption').textContent = picture.description;
 
   showComments(picture.comments);
-  setBigPictureOpenHandlers();
+  openBigPicture();
 };
 
 export {showBigPicture};

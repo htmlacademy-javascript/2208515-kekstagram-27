@@ -33,7 +33,9 @@ const getRandomIdFromRangeGenerator = (a, b) => {
   };
 };
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 checkStringLength ('1sdfs', 1);
 
-export {getRandomPositiveInteger, getRandomArrayElement, getIdGenerator, getRandomIdFromRangeGenerator};
+export {getRandomPositiveInteger, getRandomArrayElement, getIdGenerator, getRandomIdFromRangeGenerator, isEscapeKey};

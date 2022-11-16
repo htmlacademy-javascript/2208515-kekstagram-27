@@ -7,20 +7,20 @@ const commentsList = bigPicture.querySelector('.social__comments');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-const EscKeydownHandler = (evt) => {
+const escKeydownHandler = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    BigPictureCloseHandlers();
+    bigPictureCloseHandlers();
   }
 };
 
-function BigPictureCloseHandlers () {
+function bigPictureCloseHandlers () {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   commentsCount.classList.remove('hidden');
   commentsLoader.classList.remove('hidden');
-  bigPictureCancel.removeEventListener('click', BigPictureCloseHandlers);
-  document.removeEventListener('keydown', EscKeydownHandler);
+  bigPictureCancel.removeEventListener('click', bigPictureCloseHandlers);
+  document.removeEventListener('keydown', escKeydownHandler);
 }
 
 function openBigPicture () {
@@ -28,8 +28,8 @@ function openBigPicture () {
   body.classList.add('modal-open');
   commentsCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  bigPictureCancel.addEventListener('click', BigPictureCloseHandlers);
-  document.addEventListener('keydown', EscKeydownHandler);
+  bigPictureCancel.addEventListener('click', bigPictureCloseHandlers);
+  document.addEventListener('keydown', escKeydownHandler);
 }
 
 //Показывает информацию о комментаторе

@@ -1,4 +1,5 @@
-import {isEscapeKey} from './util.js';
+import { isEscapeKey } from './util.js';
+import { resetScale } from './scale.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
@@ -60,7 +61,7 @@ const showBigPicture = (picture) => {
   bigPicture.querySelector('.likes-count').textContent = picture.likes;
   bigPicture.querySelector('.comments-count').textContent = picture.comments.length;
   bigPicture.querySelector('.social__caption').textContent = picture.description;
-
+  resetScale();
   showComments(picture.comments);
   openBigPicture();
 };

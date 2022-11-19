@@ -1,4 +1,7 @@
 import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
+import {resetEffects} from './slider.js';
+
 const HASHTAGS_COUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
 const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -93,6 +96,8 @@ function closeForm () {
 function showForm () {
   imgUploadField.addEventListener('change', () => {
     form.reset();
+    resetScale();
+    resetEffects();
     pristine.reset();
     imgEdit.classList.remove('hidden');
     body.classList.add('modal-open');

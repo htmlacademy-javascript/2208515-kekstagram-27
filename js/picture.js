@@ -15,14 +15,13 @@ const createPictures = (pictures) => {
     pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
     pictureFragment.appendChild(pictureElement);
 
-    pictureElement.addEventListener('click', () => {
+    pictureElement.addEventListener('click', (evt) => {
+      evt.preventDefault();
       showBigPicture(picture);
     });
   });
 
   pictureConteiner.appendChild(pictureFragment);
-  return pictureFragment;
 };
-
 
 export {createPictures};

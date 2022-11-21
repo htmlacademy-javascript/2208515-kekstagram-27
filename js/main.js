@@ -1,5 +1,10 @@
-import {showForm} from './upload-form.js';
-import {createPhotos} from './data.js';
 import {createPictures} from './picture.js';
-createPictures(createPhotos());
-showForm();
+import {getData} from './api.js';
+import {showAlert} from './util.js';
+
+getData((pictures) => {
+  createPictures(pictures);
+},
+() => {
+  showAlert('Не удалось загрузить данные с сервера. Перезагрузите страницу');
+});

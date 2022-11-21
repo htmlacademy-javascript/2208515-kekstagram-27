@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 const getRandomPositiveInteger = (a, b) => {
   if (a < 0 || b < 0) {
     return NaN;
@@ -35,7 +37,27 @@ const getRandomIdFromRangeGenerator = (a, b) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const checkStringLength = (string, maxLength) => string.length <= maxLength;
-checkStringLength ('1sdfs', 1);
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.lineHeight = '36px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = '#232321';
+  alertContainer.style.border = '3px solid red';
 
-export {getRandomPositiveInteger, getRandomArrayElement, getIdGenerator, getRandomIdFromRangeGenerator, isEscapeKey};
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export {getRandomPositiveInteger, getRandomArrayElement, getIdGenerator, getRandomIdFromRangeGenerator, isEscapeKey, showAlert};

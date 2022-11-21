@@ -1,5 +1,5 @@
-import { isEscapeKey } from './util.js';
-import { resetScale } from './scale.js';
+import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');

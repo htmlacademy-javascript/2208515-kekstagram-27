@@ -1,6 +1,7 @@
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './slider.js';
+import {sendData} from './api.js';
 
 const HASHTAGS_COUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
@@ -34,12 +35,13 @@ pristine.addValidator(hashtagsField, validEmplyForm);
 pristine.addValidator(commentField, validEmplyForm);
 
 // Валидация символов в хэштеге
-const getHashtags = (elements) => elements.split(' ').map((element) => element.trim());
+
+const getHashtags = (element) => element.trim().split(' ');
 
 function validSimbolHashtags (value) {
   const hashtags = getHashtags(value);
-  const isEveryHashtagsValid = hashtags.every((hashtag) => regexp.test(hashtag));
-  return isEveryHashtagsValid;
+  return hashtags.every((hashtag) => regexp.test(hashtag));
+  //return isEveryHashtagsValid;
 }
 pristine.addValidator(hashtagsField, validSimbolHashtags, 'Недопустимые символы');
 
@@ -68,13 +70,12 @@ function validLengthComment (value) {
 }
 pristine.addValidator(commentField, validLengthComment, 'Превышено максимальное количество символов');
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isFormValid = pristine.validate();
-  if (isFormValid) {
-    form.submit();
-  }
-});
+const closeForm = () => {
+  form.reset();
+  pristine.reset();
+  imgEdit.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
 
 const escKeydownHandler = (evt) => {
   if (commentField === document.activeElement || hashtagsField === document.activeElement) {
@@ -82,28 +83,31 @@ const escKeydownHandler = (evt) => {
   }
   else if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeForm();
+  }
+  closeForm();
+};
+
+const showForm = () => {
+  imgEdit.classList.remove('hidden');
+  body.classList.add('modal-open');
+  document.addEventListener('keydown', escKeydownHandler);
+  resetScale();
+  resetEffects();
+};
+
+const submitForm = (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if(!isValid) {
+    const formData = new FormData(evt.target);
+    sendData(formData);
   }
 };
 
-function closeForm () {
-  imgEdit.classList.add('hidden');
-  body.classList.remove('modal-open');
-  document.removeEventListener('click', closeForm);
-  document.removeEventListener('keydown', escKeydownHandler);
-}
+imgUploadField.addEventListener('change', showForm);
+imgUploadCancel.addEventListener('click', closeForm);
+form.addEventListener('submit', submitForm);
 
-function showForm () {
-  imgUploadField.addEventListener('change', () => {
-    form.reset();
-    resetScale();
-    resetEffects();
-    pristine.reset();
-    imgEdit.classList.remove('hidden');
-    body.classList.add('modal-open');
-    imgUploadCancel.addEventListener('click', closeForm);
-    document.addEventListener('keydown', escKeydownHandler);
-  });
-}
+export {closeForm};
 
-export{showForm};
+

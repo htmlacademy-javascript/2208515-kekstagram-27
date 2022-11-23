@@ -1,6 +1,6 @@
 import {showBigPicture} from './big-picture.js';
 
-const pictureConteiner = document.querySelector('.pictures');
+const pictureContainer = document.querySelector('.pictures');
 
 const pictureTemplate = document.querySelector('#picture')
   .content
@@ -31,7 +31,7 @@ const createPictures = (pictures) => {
     });
   });
 
-  pictureConteiner.appendChild(pictureFragment);
+  pictureContainer.appendChild(pictureFragment);
   imageFilters.classList.remove('img-filters--inactive');
 };
 

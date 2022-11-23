@@ -74,7 +74,7 @@ const createSlider = () => {
   }
 };
 
-const effectButtonClickHandlers = (evt) => {
+const setEffectClickHandler = (evt) => {
   if (evt.target.classList.contains('effects__radio')) {
     chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
     createSlider();
@@ -104,7 +104,7 @@ const sliderUpdateHandlers = () => {
   valueElement.value = sliderValue;
 };
 
-effectsList.addEventListener('click', effectButtonClickHandlers);
+effectsList.addEventListener('click', setEffectClickHandler);
 sliderElement.noUiSlider.on('update', sliderUpdateHandlers);
 
 const resetEffects = () => {

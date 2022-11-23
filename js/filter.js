@@ -10,7 +10,7 @@ const comparePictures = (pictureA, pictureB) => {
   return rankB - rankA;
 };
 
-const sortingDiscussed = (pictures) => pictures.slice().sort(comparePictures);
+const sortDiscussed = (pictures) => pictures.slice().sort(comparePictures);
 
 const toggleFilter = (filter) => {
   const currentFilter = document.querySelector('.img-filters__button--active');
@@ -18,7 +18,7 @@ const toggleFilter = (filter) => {
   filter.classList.add('img-filters__button--active');
 };
 
-const filterClickHandlers = (pictures, cb) => {
+const setFilterClickHandler = (pictures, cb) => {
   filters.addEventListener('click', (evt) => {
     switch (evt.target.id) {
       case 'filter-random':
@@ -28,7 +28,7 @@ const filterClickHandlers = (pictures, cb) => {
 
       case 'filter-discussed':
         toggleFilter(evt.target);
-        cb(sortingDiscussed(pictures));
+        cb(sortDiscussed(pictures));
         break;
 
       case 'filter-default':
@@ -39,5 +39,5 @@ const filterClickHandlers = (pictures, cb) => {
   });
 };
 
-export {filterClickHandlers};
+export {setFilterClickHandler};
 

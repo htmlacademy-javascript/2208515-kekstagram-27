@@ -1,5 +1,5 @@
-import { isEscapeKey } from './util.js';
-import { resetScale } from './scale.js';
+import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
@@ -45,7 +45,7 @@ const showCommentatorInfo = (commentator) => {
 };
 
 //Показывает комментарии к изображению
-const showComments = (comments) => {
+function showComments (comments) {
   commentsList.innerHTML = '';
   commentsCount.querySelectorAll('.comment-count').textContent = comments.length;
   const commentsFragment = document.createDocumentFragment();
@@ -53,7 +53,7 @@ const showComments = (comments) => {
     commentsFragment.appendChild(showCommentatorInfo(comment));
   });
   commentsList.appendChild(commentsFragment);
-};
+}
 
 //Показывает полноэкранное изображение
 const showBigPicture = (picture) => {

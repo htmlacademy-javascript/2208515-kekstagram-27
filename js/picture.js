@@ -6,7 +6,17 @@ const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
+const imageFilters = document.querySelector('.img-filters');
+
+const clearPictures = () => {
+  const pictures = document.querySelectorAll('.picture');
+  if (pictures.length > 0) {
+    pictures.forEach((picture) => picture.remove());
+  }
+};
+
 const createPictures = (pictures) => {
+  clearPictures();
   const pictureFragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -22,6 +32,7 @@ const createPictures = (pictures) => {
   });
 
   pictureConteiner.appendChild(pictureFragment);
+  imageFilters.classList.remove('img-filters--inactive');
 };
 
 export {createPictures};

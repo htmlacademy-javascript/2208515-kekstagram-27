@@ -20,20 +20,29 @@ const getIdGenerator = () => {
   };
 };
 
-const getRandomIdFromRangeGenerator = (a, b) => {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomPositiveInteger(a, b);
-    if (previousValues.length >= (b - a + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomPositiveInteger(a, b);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
+// const getRandomIdFromRangeGenerator = (a, b) => {
+//   const previousValues = [];
+//   return function () {
+//     let currentValue = getRandomPositiveInteger(a, b);
+//     if (previousValues.length >= (b - a + 1)) {
+//       return null;
+//     }
+//     while (previousValues.includes(currentValue)) {
+//       currentValue = getRandomPositiveInteger(a, b);
+//     }
+//     previousValues.push(currentValue);
+//     return currentValue;
+//   };
+// };
+
+// const getRandomArrayFromRange = (a, b, count) => {
+//   const generate = getRandomIdFromRangeGenerator(a, b);
+//   const result = [];
+//   for (let i = 1; i <= count; i++) {
+//     result.push(generate());
+//   }
+//   return result;
+// };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
@@ -60,4 +69,36 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomPositiveInteger, getRandomArrayElement, getIdGenerator, getRandomIdFromRangeGenerator, isEscapeKey, showAlert};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this,rest),timeoutDelay);
+  };
+};
+
+const getRandomArrayFromRange = (array, countElement) => {
+  if (array.length <= countElement) {
+    return array;
+  }
+
+  let resultArray = [];
+  while (resultArray.length !== countElement) {
+    resultArray.push(getRandomArrayElement(array));
+    resultArray = Array.from(new Set(resultArray));
+  }
+  return resultArray;
+};
+
+export {
+  getRandomPositiveInteger,
+  getRandomArrayElement,
+  getIdGenerator,
+  //getRandomIdFromRangeGenerator,
+  getRandomArrayFromRange,
+  isEscapeKey,
+  showAlert,
+  debounce,
+  // sortingDiscussed,
+  // getRandomArray
+};

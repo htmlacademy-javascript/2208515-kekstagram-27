@@ -1,38 +1,32 @@
-import {closeForm} from './upload-form.js';
-import {showSuccessMessage, showErrorMessage} from './messages.js';
+const GET_URL = 'https://27.javascript.pages.academy/kekstagram/data';
+const SEND_URL = 'https://27.javascript.pages.academy/kekstagram';
 
-const getData = (onSuссess, onFail) => {
-  fetch('https://27.javascript.pages.academy/kekstagram/data')
+const getData = (onSucess, onFail) => {
+  fetch(GET_URL)
     .then((response) => response.json())
-    .then((pictures) => {
-      onSuссess(pictures);
+    .then((images) => {
+      onSucess(images);
     })
-    .catch(() => {
-      onFail('Что-то пошло не так, попробуйте позже...');
-    });
+    .catch(onFail);
 };
 
-const sendData = (data) => {
-  fetch(
-    'https://27.javascript.pages.academy/kekstagram',
+const sendData = (onSucess, onFail, body) => {
+  fetch(SEND_URL,
     {
       method: 'POST',
-      body: data,
-    },
-  ) .then((response) => {
-    if (response.ok) {
-      return response.json();
+      body: body,
     }
-    throw new Error(`${response.status} ${response.statusText}`);
-  })
-    .then(() => {
-      showSuccessMessage();
-      closeForm();
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSucess();
+      } else {
+        onFail();
+      }
     })
     .catch(() => {
-      showErrorMessage();
+      onFail();
     });
 };
 
 export {getData, sendData};
-

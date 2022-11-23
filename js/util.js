@@ -20,30 +20,6 @@ const getIdGenerator = () => {
   };
 };
 
-// const getRandomIdFromRangeGenerator = (a, b) => {
-//   const previousValues = [];
-//   return function () {
-//     let currentValue = getRandomPositiveInteger(a, b);
-//     if (previousValues.length >= (b - a + 1)) {
-//       return null;
-//     }
-//     while (previousValues.includes(currentValue)) {
-//       currentValue = getRandomPositiveInteger(a, b);
-//     }
-//     previousValues.push(currentValue);
-//     return currentValue;
-//   };
-// };
-
-// const getRandomArrayFromRange = (a, b, count) => {
-//   const generate = getRandomIdFromRangeGenerator(a, b);
-//   const result = [];
-//   for (let i = 1; i <= count; i++) {
-//     result.push(generate());
-//   }
-//   return result;
-// };
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = (message) => {
@@ -94,11 +70,8 @@ export {
   getRandomPositiveInteger,
   getRandomArrayElement,
   getIdGenerator,
-  //getRandomIdFromRangeGenerator,
   getRandomArrayFromRange,
   isEscapeKey,
   showAlert,
   debounce,
-  // sortingDiscussed,
-  // getRandomArray
 };

@@ -127,10 +127,9 @@ const submitForm = (onSuccess) => {
   });
 };
 
-const addAddFormAction = () => {
+const setFormHandlers = () => {
   addValidator();
   imgUploadField.addEventListener('change', showForm);
   imgUploadCancel.addEventListener('click', closeForm);
-  form.addEventListener('submit', submitForm);
 };
-export {closeForm,submitForm, addAddFormAction};
+export {closeForm, submitForm, setFormHandlers};

@@ -79,7 +79,8 @@ const escKeydownHandler = (evt) => {
   if (commentField === document.activeElement || hashtagsField === document.activeElement) {
     return;
   }
-  else if (isEscapeKey(evt)) {
+
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
   }
 

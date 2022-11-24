@@ -91,7 +91,7 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-const sliderUpdateHandlers = () => {
+const sliderUpdateHandler = () => {
   image.style.filter = 'none';
   image.className = '';
   valueElement.value = '';
@@ -105,7 +105,7 @@ const sliderUpdateHandlers = () => {
 };
 
 effectsList.addEventListener('click', setEffectClickHandler);
-sliderElement.noUiSlider.on('update', sliderUpdateHandlers);
+sliderElement.noUiSlider.on('update', sliderUpdateHandler);
 
 const resetEffects = () => {
   chosenEffect = DEFAULT_EFFECT;
